@@ -3,14 +3,15 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiHome, FiUser, FiLogOut } from 'react-icons/fi';
-import './App.css';
 import './index.css';
-
+import ApproveProjects from './pages/Professor/ApproveProjects';
+import ProjectReviews from './pages/Professor/ProjectReviews';
 // Pages
 import Login from './pages/Authentication/Login';
 import SignUp from './pages/Authentication/SignUp';
 import EmailVerification from './pages/Authentication/EmailVerification';
 import StudentDashboard from './pages/Student/StudentDashBoard';
+import MyProjects from './pages/Student/MyProjects';
 import ProjectProposalForm from './pages/Student/ProjectProposalForm';
 import ApprovedProjects from './pages/Student/ApprovedProjects';
 import ProjectDetails from './pages/Student/ProjectDetails';
@@ -24,7 +25,7 @@ import ProgressTracker from './pages/Admin/ProgressTracker';
 import ProfessorDashboard from './pages/Professor/ProfessorDashboard';
 import CreditAllocation from './pages/Professor/CreditAllocation';
 import ErrorPage from './pages/Error/ErrorPage';
-
+import ProjectCard from './pages/Student/ProjectCard';
 // Context
 import { AuthProvider, useAuth } from './pages/context/AuthContext';
 import Home from "./pages/Home"
@@ -53,38 +54,47 @@ const ProtectedRoute = ({ element, roles }) => {
 
 function App() {
   return (
-    <div className="app flex">
+    <div className="flex min-h-screen">
       <Router>
         <AuthProvider>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Navigate to='/login' />} />
+          <Navbar className="w-64 bg-gray-800 text-white p-4 fixed top-0 bottom-0" />
 
-            {/* Authentication Routes */}
-            <Route path='/login' element={<Login />} />
-            <Route path='/signup' element={<SignUp />} />
-            <Route path='/verify-email' element={<EmailVerification />} />
+          <div className='w-full h-screen overflow-auto'>
+            <Routes >
+              <Route path='/' element={<Home />} />
 
-            {/* Student Routes */}
-            <Route path='/dashboard/student' element={<ProtectedRoute element={<StudentDashboard />} roles={['student']} />} />
-            <Route path='/projects/propose' element={<ProtectedRoute element={<ProjectProposalForm />} roles={['student']} />} />
-            <Route path='/projects/approved' element={<ProtectedRoute element={<ApprovedProjects />} roles={['student']} />} />
-            <Route path='/notifications' element={<ProtectedRoute element={<Notifications />} roles={['student']} />} />
-            <Route path='/portfolio' element={<ProtectedRoute element={<Portfolio />} roles={['student']} />} />
+              {/* Authentication Routes */}
+              <Route path='/login' element={<Login />} />
+              <Route path='/signup' element={<SignUp />} />
+              <Route path='/verify-email' element={<EmailVerification />} />
 
-            {/* Admin Routes */}
-            <Route path='/dashboard/admin' element={<ProtectedRoute element={<AdminDashboard />} roles={['admin']} />} />
-            <Route path='/projects/:id/edit' element={<ProtectedRoute element={<EditProject />} roles={['admin']} />} />
-            <Route path='/deliverables' element={<ProtectedRoute element={<Deliverables />} roles={['admin']} />} />
-            <Route path='/progress-tracker' element={<ProtectedRoute element={<ProgressTracker />} roles={['admin']} />} />
+              {/* Student Routes */}
+              <Route path='/dashboard/student' element={<ProtectedRoute element={<StudentDashboard />} roles={['student']} />} />
+              <Route path='/project-details' element={<ProtectedRoute element={<ProjectCard />} roles={['student']} />} />
+              <Route path='/myprojects' element={<ProtectedRoute element={<MyProjects />} roles={['student']} />} />
+              <Route path='/projects/propose' element={<ProtectedRoute element={<ProjectProposalForm />} roles={['student']} />} />
+              <Route path='/projects/approved' element={<ProtectedRoute element={<ApprovedProjects />} roles={['student']} />} />
+              <Route path='/notifications' element={<ProtectedRoute element={<Notifications />} roles={['student']} />} />
+              <Route path='/portfolio' element={<ProtectedRoute element={<Portfolio />} roles={['student']} />} />
 
-            {/* Professor Routes */}
-            <Route path='/dashboard/professor' element={<ProtectedRoute element={<ProfessorDashboard />} roles={['professor']} />} />
-            <Route path='/credits' element={<ProtectedRoute element={<CreditAllocation />} roles={['professor']} />} />
+              {/* Admin Routes */}
+              <Route path='/dashboard/admin' element={<ProtectedRoute element={<AdminDashboard />} roles={['admin']} />} />
+              <Route path='/projects/:id/edit' element={<ProtectedRoute element={<EditProject />} roles={['admin']} />} />
+              <Route path='/deliverables' element={<ProtectedRoute element={<Deliverables />} roles={['admin']} />} />
+              <Route path='/progress-tracker' element={<ProtectedRoute element={<ProgressTracker />} roles={['admin']} />} />
 
-            {/* Fallback Route */}
-            <Route path='*' element={<ErrorPage />} />
-          </Routes>
+              {/* Professor Routes */}
+              <Route path='/dashboard/professor' element={<ProtectedRoute element={<ProfessorDashboard />} roles={['professor']} />} />
+              <Route path='/credits' element={<ProtectedRoute element={<CreditAllocation />} roles={['professor']} />} />
+
+              <Route path='/professor/approveProjects' element={<ProtectedRoute element={<ApproveProjects />} roles={['professor']} />} />
+              <Route path='/professor/project-reviews' element={<ProtectedRoute element={<ProjectReviews />} roles={['professor']} />} />
+
+              {/* Fallback Route */}
+              <Route path='*' element={<ErrorPage />} />
+            </Routes>
+          </div>
+
         </AuthProvider>
       </Router>
     </div>

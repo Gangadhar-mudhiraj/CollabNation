@@ -1,11 +1,18 @@
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FaUser, FaLock } from "react-icons/fa";
+import { MdOutlinePersonAddAlt } from "react-icons/md";
+import Title from "../../components/common/Title";
+import Button from "../../components/common/Button";
 
 const Login = () => {
     const { login } = useAuth();
-    const [selectedRole, setSelectedRole] = useState('student');
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
+    const [selectedRole, setSelectedRole] = useState("student");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -13,53 +20,67 @@ const Login = () => {
     };
 
     return (
-        <div className="h-screen bg-gray-100 p-8 w-full">
-            <div className="max-w-4xl mx-auto bg-white shadow-md rounded-2xl overflow-hidden mt-16">
-                <h1 className="text-2xl font-bold text-center text-gray-800">Login</h1>
-                <form onSubmit={handleLogin} className="space-y-4 p-8">
-                    <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-600">Name:</label>
+        <div className="flex items-center justify-center min-h-screen bgcolor w-full p-6">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="bg-[#264653] backdrop-blur-lg shadow-2xl rounded-2xl p-6 md:p-8 lg:p-10 w-full max-w-lg text-white border border-white/20"
+            >
+                <Title text={"Login"} />
+                <form onSubmit={handleLogin} className="space-y-6">
+                    {/* Name Input */}
+                    <div className="relative">
+                        <FaUser className="absolute left-3 top-3 text-[#2a9d8f]" />
                         <input
-                            id="name"
                             type="text"
+                            placeholder="Enter your name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            placeholder="Enter your name"
+                            required
+                            className="w-full p-3 pl-10 bg-white/20 border border-white/30 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2a9d8f] text-white placeholder-white/70 transition"
                         />
                     </div>
-                    <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-600">Password:</label>
+
+                    {/* Password Input */}
+                    <div className="relative">
+                        <FaLock className="absolute left-3 top-3 text-[#2a9d8f]" />
                         <input
-                            id="password"
                             type="password"
+                            placeholder="Enter your password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            placeholder="Enter your password"
+                            required
+                            className="w-full p-3 pl-10 bg-white/20 border border-white/30 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2a9d8f] text-white placeholder-white/70 transition"
                         />
                     </div>
-                    <div>
-                        <label htmlFor="role" className="block text-sm font-medium text-gray-600">Select Role:</label>
-                        <select
-                            id="role"
-                            value={selectedRole}
-                            onChange={(e) => setSelectedRole(e.target.value)}
-                            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        >
-                            <option value="student">Student</option>
-                            <option value="admin">Admin</option>
-                            <option value="professor">Professor</option>
-                        </select>
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+
+                    {/* Role Selection */}
+                    <motion.select
+                        value={selectedRole}
+                        onChange={(e) => setSelectedRole(e.target.value)}
+                        className="w-full p-3 bg-white/20 border border-white/30 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2a9d8f] text-white transition"
                     >
-                        Login
-                    </button>
+                        <option value="student" className="text-black">Student</option>
+                        <option value="admin" className="text-black">Admin</option>
+                        <option value="professor" className="text-black">Professor</option>
+                    </motion.select>
+
+                    {/* Login Button */}
+                    <Button text="Login" />
                 </form>
-            </div>
+
+                {/* Signup Link */}
+                <p className="text-center mt-4 text-sm md:text-base">
+                    Don't have an account?
+                    <span
+                        className="text-[#e9c46a] hover:underline cursor-pointer flex items-center justify-center gap-1 mt-2"
+                        onClick={() => navigate("/signup")}
+                    >
+                        <MdOutlinePersonAddAlt /> Sign Up
+                    </span>
+                </p>
+            </motion.div>
         </div>
     );
 };
