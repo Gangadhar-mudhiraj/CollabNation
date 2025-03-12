@@ -10,17 +10,18 @@ createRoot(document.getElementById('root')).render(
   <>
     <App />
     <ToastContainer
-      position="top-right"
+      position="top-center"
       autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
-      closeOnClick={false}
+      closeOnClick={true} // Allow closing on click
       rtl={false}
       pauseOnFocusLoss
       draggable
       pauseOnHover
       theme="light"
     />
+
   </>
   //</StrictMode>,
 )

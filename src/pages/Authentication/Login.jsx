@@ -64,6 +64,7 @@ const Login = () => {
                         <option value="student" className="text-black">Student</option>
                         <option value="admin" className="text-black">Admin</option>
                         <option value="professor" className="text-black">Professor</option>
+                        <option value="mentor" className="text-black">Mentor</option>
                     </motion.select>
 
                     {/* Login Button */}

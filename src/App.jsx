@@ -6,7 +6,10 @@ import { FiHome, FiUser, FiLogOut } from 'react-icons/fi';
 import './index.css';
 import ApproveProjects from './pages/Professor/ApproveProjects';
 import ProjectReviews from './pages/Professor/ProjectReviews';
-// Pages
+import MentorDashboard from './pages/Mentor/MentorDashboard';
+import TaskMonitoring from './pages/Mentor/TaskMonitoring';
+import ProjectGuidance from './pages/Mentor/ProjectGuidance';
+import WeeklyReview from './pages/Mentor/WeeklyReview';
 import Login from './pages/Authentication/Login';
 import SignUp from './pages/Authentication/SignUp';
 import EmailVerification from './pages/Authentication/EmailVerification';
@@ -14,14 +17,13 @@ import StudentDashboard from './pages/Student/StudentDashBoard';
 import MyProjects from './pages/Student/MyProjects';
 import ProjectProposalForm from './pages/Student/ProjectProposalForm';
 import ApprovedProjects from './pages/Student/ApprovedProjects';
-import ProjectDetails from './pages/Student/ProjectDetails';
-import TeamFormation from './pages/Student/TeamFormation';
 import Notifications from './pages/Common/Notifications';
 import Portfolio from './pages/Student/Portfolio';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import EditProject from './pages/Admin/EditProject';
 import Deliverables from './pages/Admin/Deliverables';
-import ProgressTracker from './pages/Admin/ProgressTracker';
+import ProgressTracker from './pages/Student/ProgressTracker';
+import AssignedProjects from './pages/Student/AssignedProjects';
 import ProfessorDashboard from './pages/Professor/ProfessorDashboard';
 import CreditAllocation from './pages/Professor/CreditAllocation';
 import ErrorPage from './pages/Error/ErrorPage';
@@ -72,6 +74,10 @@ function App() {
               <Route path='/dashboard/student' element={<ProtectedRoute element={<StudentDashboard />} roles={['student']} />} />
               <Route path='/project-details' element={<ProtectedRoute element={<ProjectCard />} roles={['student']} />} />
               <Route path='/myprojects' element={<ProtectedRoute element={<MyProjects />} roles={['student']} />} />
+              <Route path='/progress/:title' element={<ProtectedRoute element={<ProgressTracker />} roles={['student']} />} />
+              <Route path='/assignedProjects' element={<ProtectedRoute element={<AssignedProjects />} roles={['student']} />} />
+
+
               <Route path='/projects/propose' element={<ProtectedRoute element={<ProjectProposalForm />} roles={['student']} />} />
               <Route path='/projects/approved' element={<ProtectedRoute element={<ApprovedProjects />} roles={['student']} />} />
               <Route path='/notifications' element={<ProtectedRoute element={<Notifications />} roles={['student']} />} />
@@ -81,7 +87,7 @@ function App() {
               <Route path='/dashboard/admin' element={<ProtectedRoute element={<AdminDashboard />} roles={['admin']} />} />
               <Route path='/projects/:id/edit' element={<ProtectedRoute element={<EditProject />} roles={['admin']} />} />
               <Route path='/deliverables' element={<ProtectedRoute element={<Deliverables />} roles={['admin']} />} />
-              <Route path='/progress-tracker' element={<ProtectedRoute element={<ProgressTracker />} roles={['admin']} />} />
+
 
               {/* Professor Routes */}
               <Route path='/dashboard/professor' element={<ProtectedRoute element={<ProfessorDashboard />} roles={['professor']} />} />
@@ -89,6 +95,24 @@ function App() {
 
               <Route path='/professor/approveProjects' element={<ProtectedRoute element={<ApproveProjects />} roles={['professor']} />} />
               <Route path='/professor/project-reviews' element={<ProtectedRoute element={<ProjectReviews />} roles={['professor']} />} />
+
+              {/* Mentor routes*/}
+              <Route
+                path='/dashboard/mentor'
+                element={<ProtectedRoute element={<MentorDashboard />} roles={['mentor']} />}
+              />
+              <Route
+                path='/project-guidance'
+                element={<ProtectedRoute element={<ProjectGuidance />} roles={['mentor']} />}
+              />
+              <Route
+                path='/task-monitoring'
+                element={<ProtectedRoute element={<TaskMonitoring />} roles={['mentor']} />}
+              />
+              <Route
+                path='/weekly-review'
+                element={<ProtectedRoute element={<WeeklyReview />} roles={['mentor']} />}
+              />
 
               {/* Fallback Route */}
               <Route path='*' element={<ErrorPage />} />

@@ -43,6 +43,7 @@ const Navbar = () => {
             { to: '/notifications', label: 'Notifications', icon: <FiBell size={20} /> },
             // { to: '/portfolio', label: 'Portfolio', icon: <FiUser size={20} /> },
             { to: '/myprojects', label: 'My Projects', icon: <FiFolder size={20} /> },
+            { to: '/assignedProjects', label: 'assigned Projects', icon: <FiFolder size={20} /> }
 
             // { to: '/task-assignments', label: 'Task Assignments', icon: <FiClipboard size={20} /> },
             // { to: '/team-formation', label: 'Team Formation', icon: <FiUsers size={20} /> },

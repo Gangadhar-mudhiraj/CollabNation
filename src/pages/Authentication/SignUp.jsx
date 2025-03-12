@@ -9,11 +9,12 @@ import Button from "../../components/common/Button";
 const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [selectedRole, setSelectedRole] = useState("student");
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Signup successful!");
+        alert(`Signup successful for ${selectedRole}!`);
         navigate("/login");
     };
 
@@ -53,20 +54,20 @@ const SignUp = () => {
                         />
                     </div>
 
-                    {/* Sign Up Button */}
+                    {/* Role Selection */}
+                    <select
+                        value={selectedRole}
+                        onChange={(e) => setSelectedRole(e.target.value)}
+                        className="w-full p-3 bg-white/20 border border-white/30 rounded-md focus:outline-none focus:ring-2 focus:ring-[#2a9d8f] text-white transition"
+                    >
+                        <option value="student" className="text-black">Student</option>
+                        <option value="admin" className="text-black">Admin</option>
+                        <option value="professor" className="text-black">Professor</option>
+                        <option value="mentor" className="text-black">Mentor</option>
+                    </select>
+
                     <Button text="Sign Up" />
                 </form>
-
-                {/* Login Link */}
-                <p className="text-center mt-4 text-sm md:text-base">
-                    Already have an account?
-                    <span
-                        className="text-[#e9c46a] hover:underline cursor-pointer flex items-center justify-center gap-1 mt-2"
-                        onClick={() => navigate("/login")}
-                    >
-                        <MdOutlinePersonAddAlt /> Login
-                    </span>
-                </p>
             </motion.div>
         </div>
     );

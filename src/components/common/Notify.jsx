@@ -1,13 +1,33 @@
-import React from 'react'
-import { toast } from 'react-toastify'
-const Notify = ({ status, text }) => {
+import { toast } from "react-toastify";
 
-    if (status) {
-        toast.success(text)
-    } else {
-        toast.error(text)
-    }
+function SuccessNotify(text) {
+    // text in center for all
+    console.log("jii");
 
+    toast.success(text ? text : "Success!", {
+        className: "bg-white text-green-800 text-sm font-bold shadow-md",
+        bodyClassName: "flex justify-center items-center",
+        progressClassName: "bg-green-800"
+    })
 }
 
-export { Notify }
+
+function FailureNotify(text) {
+    console.log("jii");
+    toast.error(text ? text : "Failed!", {
+        className: "bg-white text-red-800 text-sm font-bold shadow-md",
+        bodyClassName: "flex justify-center items-center",
+        progressClassName: "bg-red-800"
+    })
+}
+
+function Notify(text) {
+    console.log("jii");
+    toast(text ? text : "Done!", {
+        className: "bg-white text-gray-800 text-sm font-bold shadow-md text-center",
+        bodyClassName: "flex justify-center items-center ",
+        progressClassName: "bg-gray-600"
+    })
+}
+
+export { SuccessNotify, FailureNotify, Notify }
