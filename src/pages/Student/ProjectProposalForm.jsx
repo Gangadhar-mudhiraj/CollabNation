@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useProjectContext } from '../context/ProjectContext';
 import { FaProjectDiagram, FaClock, FaUserFriends, FaUserTie, FaTools, FaFileAlt } from 'react-icons/fa';
+import { SuccessNotify } from '../../components/common/Notify';
 
 const ProjectProposalForm = () => {
     const [title, setTitle] = useState('');
@@ -9,8 +11,10 @@ const ProjectProposalForm = () => {
     const [skills, setSkills] = useState('');
     const [collaborators, setCollaborators] = useState('');
     const [mentors, setMentors] = useState('');
-
+    const { addNotification } = useProjectContext()
     const handleSubmit = (e) => {
+        addNotification("new project proposed", title)
+        SuccessNotify("project proposed successfully")
         e.preventDefault();
         console.log('Project Proposal Submitted:', { title, description, duration, skills, collaborators, mentors });
     };

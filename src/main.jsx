@@ -1,13 +1,13 @@
 import React from 'react'
-// import { StrictMode } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { ProjectProvider } from './pages/context/ProjectContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  //<StrictMode>
-  <>
+  // <StrictMode>
+  <ProjectProvider>
     <App />
     <ToastContainer
       position="top-center"
@@ -21,7 +21,6 @@ createRoot(document.getElementById('root')).render(
       pauseOnHover
       theme="light"
     />
-
-  </>
-  //</StrictMode>,
+  </ProjectProvider>
+  // </StrictMode>
 )
