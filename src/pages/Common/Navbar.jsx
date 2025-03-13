@@ -20,7 +20,8 @@ import {
     FiEye,
     FiBarChart,
     FiList,
-    FiCalendar
+    FiCalendar,
+    FiFileText, FiLayers
 } from 'react-icons/fi';
 
 const Navbar = () => {
@@ -50,10 +51,12 @@ const Navbar = () => {
         ],
         admin: [
             { to: '/dashboard/admin', label: 'Admin Dashboard', icon: <FiUser size={20} /> },
-            { to: '/projects/:id/edit', label: 'Edit Project', icon: <FiBookOpen size={20} /> },
-            { to: '/deliverables', label: 'Deliverables', icon: <FiBriefcase size={20} /> },
-            { to: '/progress-tracker', label: 'Progress Tracker', icon: <FiBell size={20} /> },
+            { to: '/proposal-form', label: 'Proposal Form', icon: <FiFileText size={20} /> },
+            { to: '/proposal-list', label: 'Proposal List', icon: <FiList size={20} /> },
+            { to: '/collaboration-form', label: 'Collaboration Form', icon: <FiUsers size={20} /> },
+            { to: '/collaboration-list', label: 'Collaboration List', icon: <FiLayers size={20} /> }
         ],
+
         professor: [
             { to: '/dashboard/professor', label: 'Professor Dashboard', icon: <FiUser size={20} /> },
             { to: '/credits', label: 'Credit Allocation', icon: <FiBookOpen size={20} /> },

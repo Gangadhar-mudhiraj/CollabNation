@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaClipboardList, FaCheckCircle, FaClock, FaUsers, FaPlay, FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { Notify, SuccessNotify, FailureNotify } from '../../components/common/Notify';
 
 const MyProjects = () => {
     const [showApplications, setShowApplications] = useState(false);
@@ -111,10 +112,12 @@ const MyProjects = () => {
 
     const handleApprove = () => {
         setActionStatus('Approved');
+        SuccessNotify('Application approved successfully!');
     };
 
     const handleReject = () => {
         setActionStatus('Rejected');
+        FailureNotify('Application rejected.');
     };
 
     return (

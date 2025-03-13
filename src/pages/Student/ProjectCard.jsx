@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaUserFriends, FaUserTie } from 'react-icons/fa';
+import { SuccessNotify, FailureNotify, Notify } from '../../components/common/Notify'; // Import notifications
 
 const ProjectCard = () => {
     const location = useLocation();
@@ -15,12 +16,23 @@ const ProjectCard = () => {
     const handleApply = (type) => {
         setApplicationType(type);
         setIsModalOpen(true);
+        Notify(`Applying as ${type}`); // Simple notification
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!formData.name.trim() || !formData.email.trim()) {
+            FailureNotify('Please fill in all fields before submitting.');
+            return;
+        }
+
+        SuccessNotify(`Successfully applied as ${applicationType} for ${project.title}`);
         console.log(`Applied as ${applicationType} for ${project.title}`, formData);
-        navigate('/projects/approved');
+
+        setFormData({ name: '', email: '' }); // Clear form
+        setIsModalOpen(false); // Close modal
+        navigate('/projects/approved'); // Redirect after submission
     };
 
     const handleChange = (e) => {
@@ -47,6 +59,7 @@ const ProjectCard = () => {
                     <p><strong>Mentors:</strong> {project.mentors}</p>
                 </div>
 
+                {/* Apply Buttons */}
                 <div className="mt-6 flex justify-center gap-6">
                     <button
                         onClick={() => handleApply('Collaborator')}
@@ -63,10 +76,13 @@ const ProjectCard = () => {
                 </div>
             </div>
 
+            {/* Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
                     <div className="bg-[#264653] p-6 rounded-xl shadow-lg w-96">
-                        <h2 className="text-xl font-bold text-white mb-4">Apply as {applicationType}</h2>
+                        <h2 className="text-xl font-bold text-white mb-4">
+                            Apply as {applicationType}
+                        </h2>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <input
                                 type="text"
@@ -75,7 +91,7 @@ const ProjectCard = () => {
                                 onChange={handleChange}
                                 placeholder="Your Name"
                                 required
-                                className="w-full p-3 rounded bg-gray-700 text-white"
+                                className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             <input
                                 type="email"
@@ -84,7 +100,7 @@ const ProjectCard = () => {
                                 onChange={handleChange}
                                 placeholder="Your Email"
                                 required
-                                className="w-full p-3 rounded bg-gray-700 text-white"
+                                className="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             <button
                                 type="submit"

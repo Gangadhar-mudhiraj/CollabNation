@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaCheckCircle, FaTimesCircle, FaClipboardList } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Notify, SuccessNotify, FailureNotify } from '../../components/common/Notify';
 
 const ApproveProjects = () => {
     const [projects, setProjects] = useState([
@@ -13,12 +14,14 @@ const ApproveProjects = () => {
         setProjects(projects.map(proj =>
             proj.id === id ? { ...proj, status: 'Approved' } : proj
         ));
+        SuccessNotify('Project Approved Successfully');
     };
 
     const handleReject = (id) => {
         setProjects(projects.map(proj =>
             proj.id === id ? { ...proj, status: 'Rejected' } : proj
         ));
+        FailureNotify('Project Rejected');
     };
 
     return (
@@ -68,6 +71,8 @@ const ApproveProjects = () => {
                     ))}
                 </ul>
             </div>
+            {/* Render Notify component (if needed for general notifications) */}
+            <Notify />
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaUserGraduate, FaCheckCircle, FaTimesCircle, FaChartBar } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Notify, SuccessNotify, FailureNotify } from '../../components/common/Notify';
 
 const CreditAllocation = () => {
     const [projects, setProjects] = useState([
@@ -40,6 +41,15 @@ const CreditAllocation = () => {
                     : project
             )
         );
+
+        const project = projects.find((p) => p.id === projectId);
+        const contributor = project.contributors[contributorIndex];
+
+        if (contributor.active) {
+            SuccessNotify(`${contributor.name} was allocated credits successfully!`);
+        } else {
+            FailureNotify(`${contributor.name} is not active and cannot be allocated credits.`);
+        }
     };
 
     return (
@@ -92,6 +102,7 @@ const CreditAllocation = () => {
                     ))}
                 </div>
             </div>
+            <Notify />
         </div>
     );
 };

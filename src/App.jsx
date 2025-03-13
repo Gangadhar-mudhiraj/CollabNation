@@ -1,8 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FiHome, FiUser, FiLogOut } from 'react-icons/fi';
 import './index.css';
 import ApproveProjects from './pages/Professor/ApproveProjects';
 import ProjectReviews from './pages/Professor/ProjectReviews';
@@ -14,14 +11,16 @@ import Login from './pages/Authentication/Login';
 import SignUp from './pages/Authentication/SignUp';
 import EmailVerification from './pages/Authentication/EmailVerification';
 import StudentDashboard from './pages/Student/StudentDashBoard';
+import CollaborationForm from "./pages/Admin/CollaborationForm"
+import CollaborationList from "./pages/Admin/CollaborationList"
 import MyProjects from './pages/Student/MyProjects';
 import ProjectProposalForm from './pages/Student/ProjectProposalForm';
+import ProposalForm from "./pages/Admin/ProposalForm"
 import ApprovedProjects from './pages/Student/ApprovedProjects';
 import Notifications from './pages/Common/Notifications';
 import Portfolio from './pages/Student/Portfolio';
 import AdminDashboard from './pages/Admin/AdminDashboard';
-import EditProject from './pages/Admin/EditProject';
-import Deliverables from './pages/Admin/Deliverables';
+import ProposalList from "./pages/Admin/ProposalList"
 import ProgressTracker from './pages/Student/ProgressTracker';
 import AssignedProjects from './pages/Student/AssignedProjects';
 import ProfessorDashboard from './pages/Professor/ProfessorDashboard';
@@ -85,8 +84,10 @@ function App() {
 
               {/* Admin Routes */}
               <Route path='/dashboard/admin' element={<ProtectedRoute element={<AdminDashboard />} roles={['admin']} />} />
-              <Route path='/projects/:id/edit' element={<ProtectedRoute element={<EditProject />} roles={['admin']} />} />
-              <Route path='/deliverables' element={<ProtectedRoute element={<Deliverables />} roles={['admin']} />} />
+              <Route path='/proposal-form' element={<ProtectedRoute element={<ProposalForm />} roles={['admin']} />} />
+              <Route path='/proposal-list' element={<ProtectedRoute element={<ProposalList />} roles={['admin']} />} />
+              <Route path='/collaboration-form' element={<ProtectedRoute element={<CollaborationForm />} roles={['admin']} />} />
+              <Route path='/collaboration-list' element={<ProtectedRoute element={<CollaborationList />} roles={['admin']} />} />
 
 
               {/* Professor Routes */}
